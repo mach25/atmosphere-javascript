@@ -1,6 +1,4 @@
 sudo: false
 language: javascript
-jdk:
-  - oraclejdk7
-before_install: 'mvn -version'
-install: 'mvn clean install'
+before_install: 'npm -version'
+install: 'npm run compile'
