@@ -29,7 +29,7 @@ let offline = false;
 let requests = [];
 let callbacks = [];
 let uuid = 0;
-const atmosphere = {
+const Atmosphere = {
   version: '2.3.3-javascript',
   onError: function (response) {
   },
@@ -119,7 +119,7 @@ const atmosphere = {
       }
     };
     /* eslint new-cap: 0 */
-    _socket = new atmosphere.subscribe(request);
+    _socket = new Atmosphere.subscribe(request);
 
     return _adapter;
   },
@@ -418,7 +418,7 @@ const atmosphere = {
         let rq = {
           connected: false
         };
-        let closeR = new atmosphere.AtmosphereRequest(rq);
+        let closeR = new Atmosphere.AtmosphereRequest(rq);
         closeR.connectTimeout = _request.connectTimeout;
         closeR.attachHeadersAsQueryString = false;
         closeR.dropHeaders = true;
@@ -1769,7 +1769,7 @@ const atmosphere = {
 
       url += (url.indexOf('?') !== -1) ? '&' : '?';
       url += 'X-Atmosphere-tracking-id=' + rq.uuid;
-      url += '&X-Atmosphere-Framework=' + atmosphere.version;
+      url += '&X-Atmosphere-Framework=' + Atmosphere.version;
       url += '&X-Atmosphere-Transport=' + rq.transport;
 
       if (rq.trackMessageLength) {
@@ -1883,7 +1883,7 @@ const atmosphere = {
       };
 
       let reconnectF = function (force) {
-        if (atmosphere._beforeUnloadState) {
+        if (Atmosphere._beforeUnloadState) {
           // ATMOSPHERE-JAVASCRIPT-143: Delay reconnect to avoid reconnect attempts before an actual unload (we don't know if an unload will happen, yet)
           util.debug(new Date() + ' Atmosphere: reconnectF: execution delayed due to _beforeUnloadState flag');
           setTimeout(function () {
@@ -2161,7 +2161,7 @@ const atmosphere = {
       }
 
       if (!_request.dropHeaders) {
-        ajaxRequest.setRequestHeader('X-Atmosphere-Framework', atmosphere.version);
+        ajaxRequest.setRequestHeader('X-Atmosphere-Framework', Atmosphere.version);
         ajaxRequest.setRequestHeader('X-Atmosphere-Transport', request.transport);
 
         if (request.heartbeat !== null && request.heartbeat.server !== null) {
@@ -2950,15 +2950,9 @@ const atmosphere = {
   }
 };
 
-export default {
-  atmosphere,
-  Atmosphere: atmosphere,
-  AtmosphereRequest: atmosphere.AtmosphereRequest
-};
-
-atmosphere.subscribe = function (url, callback, request) {
+Atmosphere.subscribe = function (url, callback, request) {
   if (typeof (callback) === 'function') {
-    atmosphere.addCallback(callback);
+    Atmosphere.addCallback(callback);
   }
 
   if (typeof (url) !== 'string') {
@@ -2970,14 +2964,14 @@ atmosphere.subscribe = function (url, callback, request) {
   // https://github.com/Atmosphere/atmosphere-javascript/issues/58
   uuid = ((typeof (request) !== 'undefined') && typeof (request.uuid) !== 'undefined') ? request.uuid : 0;
 
-  let rq = new atmosphere.AtmosphereRequest(request);
+  let rq = new Atmosphere.AtmosphereRequest(request);
   rq.execute();
 
   requests[requests.length] = rq;
   return rq;
 };
 
-atmosphere.unsubscribe = function () {
+Atmosphere.unsubscribe = function () {
   if (requests.length > 0) {
     let requestsClone = [].concat(requests);
     for (let i = 0; i < requestsClone.length; i++) {
@@ -2994,7 +2988,7 @@ atmosphere.unsubscribe = function () {
   callbacks = [];
 };
 
-atmosphere.unsubscribeUrl = function (url) {
+Atmosphere.unsubscribeUrl = function (url) {
   let idx = -1;
   if (requests.length > 0) {
     for (let i = 0; i < requests.length; i++) {
@@ -3019,13 +3013,13 @@ atmosphere.unsubscribeUrl = function (url) {
   }
 };
 
-atmosphere.addCallback = function (func) {
+Atmosphere.addCallback = function (func) {
   if (util.inArray(func, callbacks) === -1) {
     callbacks.push(func);
   }
 };
 
-atmosphere.removeCallback = function (func) {
+Atmosphere.removeCallback = function (func) {
   let index = util.inArray(func, callbacks);
   if (index !== -1) {
     callbacks.splice(index, 1);
@@ -3068,17 +3062,17 @@ guid = util.now();
 
 util.on(window, 'unload', function (event) {
   util.debug(new Date() + ' Atmosphere: ' + 'unload event');
-  atmosphere.unsubscribe();
+  Atmosphere.unsubscribe();
 });
 
 util.on(window, 'beforeunload', function (event) {
   util.debug(new Date() + ' Atmosphere: ' + 'beforeunload event');
 
   // ATMOSPHERE-JAVASCRIPT-143: Delay reconnect to avoid reconnect attempts before an actual unload (we don't know if an unload will happen, yet)
-  atmosphere._beforeUnloadState = true;
+  Atmosphere._beforeUnloadState = true;
   setTimeout(function () {
     util.debug(new Date() + ' Atmosphere: ' + 'beforeunload event timeout reached. Reset _beforeUnloadState flag');
-    atmosphere._beforeUnloadState = false;
+    Atmosphere._beforeUnloadState = false;
   }, 5000);
 });
 
@@ -3124,4 +3118,6 @@ util.on(window, 'online', function () {
   }
   offline = false;
 });
-/* jshint eqnull:true, noarg:true, noempty:true, eqeqeq:true, evil:true, laxbreak:true, undef:true, browser:true, indent:false, maxerr:50 */
+
+export const AtmosphereRequest = Atmosphere.AtmosphereRequest;
+export default Atmosphere;

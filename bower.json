@@ -1,0 +1,24 @@
+{
+  "name": "atmosphere.js",
+  "description": "Javascript clients for Atmosphere",
+  "main": "src/index.js",
+  "keywords": [
+    "atmosphere",
+    "streaming",
+    "websockets",
+    "sse",
+    "server-side-events",
+    "long-polling"
+  ],
+  "authors": [
+    { "name": "Jeanfrancois Arcand", "email": "jfarcand@apache.org" }
+  ],
+  "moduleType": [
+    "es6"
+  ],
+  "ignore": [
+    "test",
+    "bundles"
+  ],
+  "license": "SEE LICENSE IN LICENSE"
+}
