@@ -1,13 +1,14 @@
 import mocha from 'mocha';
 import chai, { expect } from 'chai';
 import util from '../src/util';
+/* eslint no-unused-vars: 0, camelcase: 0, no-undef: 0 */
 
-describe('Testing agent strings from android', function agent_string_android() {
+describe('Testing agent strings from android', function agent_string_android () {
   let originalNavigator;
-  beforeEach(function save_original_user_agent() {
+  beforeEach(function save_original_user_agent () {
     originalNavigator = global.navigator;
   });
-  afterEach(function teardown_user_agent_mock() {
+  afterEach(function teardown_user_agent_mock () {
     global.navigator = originalNavigator;
   });
 
@@ -63,7 +64,7 @@ describe('Testing agent strings from android', function agent_string_android() {
     'Mozilla/5.0 (Linux; U; Android 3.0; en-us; Xoom Build/HRI39) AppleWebKit/534.13 (KHTML, like Gecko) Version/4.0 Safari/534.13',
     'Mozilla/5.0 (Linux; U; Android 3.2; en-us; Nexus One Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1',
     'Mozilla/5.0 (Linux; U; Android 4.0.3; ko-kr; LG-L160L Build/IML74K) AppleWebkit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30',
-    'Mozilla/5.0 (Linux; U; Android 4.0.3; de-ch; HTC Sensation Build/IML74K) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30',
+    'Mozilla/5.0 (Linux; U; Android 4.0.3; de-ch; HTC Sensation Build/IML74K) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30'
   ].forEach(function (item) {
     it(`${item} should return false`, function test_android_agent_strings_version_three_and_greater () {
       global.navigator = {
