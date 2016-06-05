@@ -2,7 +2,7 @@
   "name": "@mach25/atmosphere-javascript",
   "version": "2.3.3",
   "description": "Javascript clients for Atmosphere",
-  "main": "index.js",
+  "main": "lib",
   "scripts": {
     "start": "webpack-dev-server --config webpack.config.js --hot",
     "compile": "babel src --out-dir lib --presets es2015 --plugins transform-object-rest-spread,transform-class-properties",
