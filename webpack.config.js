@@ -1,7 +1,7 @@
 module.exports = {
   entry: './src/index.js',
   output: {
-    path: './build',
+    path: './dist',
     filename: 'atmosphere.js'
   },
   module: {

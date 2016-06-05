@@ -1,13 +1,13 @@
 {
   "name": "@mach25/atmosphere-javascript",
-  "version": "2.3.3",
+  "version": "2.3.4",
   "description": "Javascript clients for Atmosphere",
   "main": "lib",
   "scripts": {
     "start": "webpack-dev-server --config webpack.config.js --hot",
     "compile": "babel src --out-dir lib --presets es2015 --plugins transform-object-rest-spread,transform-class-properties",
-    "bundle": "webpack --config webpack.config.js -p --output-source-map-file --output-filename atmosphere.min.js",
-    "bundle:dev": "webpack --config webpack.config.js",
+    "bundle": "webpack --config webpack.config.js -p --devtool source-map --output-source-map-file atmosphere.min.map --output-filename atmosphere.min.js",
+    "bundle:dev": "webpack --config webpack.config.js -d",
     "test": "eslint -c .eslintrc.json src test && mocha --compilers js:babel-register --recursive ./test",
     "push:npm": "npm install && npm run compile && npm publish"
   },
