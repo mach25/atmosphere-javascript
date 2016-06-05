@@ -3026,8 +3026,6 @@ Atmosphere.removeCallback = function (func) {
   }
 };
 
-guid = util.now();
-
 // Browser sniffing
 (function () {
   const ua = navigator.userAgent.toLowerCase();
