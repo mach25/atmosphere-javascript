@@ -1,5 +1,5 @@
 module.exports = {
-  entry: './src/index.js',
+  entry: './bundle/atmosphere.bundle.js',
   output: {
     path: './dist',
     filename: 'atmosphere.js'

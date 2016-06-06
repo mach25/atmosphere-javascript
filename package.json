@@ -1,6 +1,6 @@
 {
   "name": "@mach25/atmosphere-javascript",
-  "version": "2.3.5",
+  "version": "2.3.6",
   "description": "Javascript clients for Atmosphere",
   "main": "lib",
   "scripts": {
