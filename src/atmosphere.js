@@ -1379,6 +1379,7 @@ const Atmosphere = {
             try {
               _clearState();
             } catch (e) {
+              // ignore
             }
             return;
           }
@@ -2723,6 +2724,7 @@ const Atmosphere = {
             request.uuid = tempUUID.split(' ').pop();
           }
         } catch (e) {
+          // ignore
         }
       }
     }

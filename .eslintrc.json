@@ -3,12 +3,12 @@
     "es6": true,
     "browser": true
   },
-  "extends": "standard",
-  "plugins": [
-    "standard"
-  ],
+  "extends": "eslint:recommended",
+  "plugins": [],
   "parser": "babel-eslint",
   "rules": {
-    "semi": 0
+    "semi": 0,
+    "no-unused-vars": 0,
+    "no-case-declarations": 0
   }
 }
